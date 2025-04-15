@@ -1,7 +1,7 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:myapp/ui/_core/app_colors.dart';
+
+import '../home/home_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -40,7 +40,17 @@ class SplashScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+// Suggested code may be subject to a license. Learn more: ~LicenseLog:2315508164.
+                        Navigator.pushReplacement(
+                          context, 
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return HomeScreen();
+                            },
+                          ),
+                        );
+                      },
                       child: Text("Bora!"),
                     ),
                   ),
