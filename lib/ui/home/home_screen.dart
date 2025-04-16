@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/data/categories_data.dart';
+import 'package:myapp/data/restaurants_data.dart';
+import 'package:myapp/model/restaurant.dart';
 import 'package:myapp/ui/home/widgets/category_widget.dart';
+import 'package:myapp/ui/home/widgets/restaurant_widget.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    RestaurantsData restaurantData = Provider.of<RestaurantsData>(context);
     return Scaffold(
       drawer: Drawer(),
       appBar: AppBar(
@@ -29,15 +34,27 @@ class HomeScreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   spacing: 8,
-                  children: List.generate(CategoriesData.listCategories.length, (
-                    index,
-                  ) {
-                    return CategoryWidget(category: CategoriesData.listCategories[index]);
-                  }),
+                  children: List.generate(
+                    CategoriesData.listCategories.length,
+                    (index) {
+                      return CategoryWidget(
+                        category: CategoriesData.listCategories[index],
+                      );
+                    },
+                  ),
                 ),
               ),
               Image.asset("assets/banners/banner_promo.png"),
               Text("Bem avaliados"),
+              Column(
+                spacing: 10,
+                children: List.generate(restaurantData.listRestaurant.length, (
+                  index,
+                ) {
+                  Restaurant restaurant = restaurantData.listRestaurant[index];
+                  return RestaurantWidget(restaurant: restaurant);
+                }),
+              ),
               SizedBox(height: 64),
             ],
           ),
